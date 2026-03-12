@@ -1,137 +1,136 @@
-"use client";
+import { races } from "../data/races";
 
-import { useEffect, useMemo, useState } from "react";
+type StandingRow = {
+  driver: string;
+  points: number;
+  races: number;
+  wins: number;
+  podiums: number;
+  bestFinish: number;
+};
 
-type Driver = { name: string; points: number };
+function buildStandings(): StandingRow[] {
+  const map = new Map<string, StandingRow>();
 
-function readDrivers(): Driver[] {
-  try {
-    const raw = localStorage.getItem("kartz_drivers");
-    const parsed = raw ? (JSON.parse(raw) as Driver[]) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
+  for (const race of races) {
+    for (const result of race.results) {
+      const current = map.get(result.driver) ?? {
+        driver: result.driver,
+        points: 0,
+        races: 0,
+        wins: 0,
+        podiums: 0,
+        bestFinish: Number.POSITIVE_INFINITY,
+      };
+
+      current.points += result.points;
+      current.races += 1;
+
+      if (result.position === 1) current.wins += 1;
+      if (result.position <= 3) current.podiums += 1;
+      if (result.position < current.bestFinish) current.bestFinish = result.position;
+
+      map.set(result.driver, current);
+    }
   }
+
+  return Array.from(map.values()).sort((a, b) => {
+    if (b.points !== a.points) return b.points - a.points;
+    if (b.wins !== a.wins) return b.wins - a.wins;
+    if (b.podiums !== a.podiums) return b.podiums - a.podiums;
+    return a.bestFinish - b.bestFinish;
+  });
+}
+
+function getRankBadge(index: number) {
+  if (index === 0) return "🥇";
+  if (index === 1) return "🥈";
+  if (index === 2) return "🥉";
+  return `#${index + 1}`;
 }
 
 export default function StatsPage() {
-  const [drivers, setDrivers] = useState<Driver[]>([]);
-
-  // ✅ evita hydration mismatch: leemos localStorage solo en cliente
-  useEffect(() => {
-    setDrivers(readDrivers());
-  }, []);
-
-  const sorted = useMemo(() => {
-    return [...drivers]
-      .filter((d) => d?.name && Number.isFinite(d.points))
-      .sort((a, b) => b.points - a.points);
-  }, [drivers]);
-
-  const totalPilots = sorted.length;
-  const totalPoints = useMemo(
-    () => sorted.reduce((acc, d) => acc + (d.points || 0), 0),
-    [sorted]
-  );
-
-  const leader = sorted[0];
-  const podium = sorted.slice(0, 3);
+  const standings = buildStandings();
+  const totalRaces = races.length;
+  const totalDrivers = standings.length;
 
   return (
-    <main className="container">
-      <h1 className="pageTitle">Torneo</h1>
-      <p className="pageSub">Ranking general y puntajes acumulados.</p>
-
-      {/* ===== PODIO ===== */}
-      <section className="podiumWrap">
-        <h2 className="sectionTitle">Podio</h2>
-
-        {podium.length === 0 ? (
-          <div className="emptyState">
-            Todavía no hay puntajes. Cargá una carrera en “Cargar carrera”.
-          </div>
-        ) : (
-          <div className="podium">
-            {/* 2do */}
-            <div className="podiumCol second">
-              <div className="podiumCard">
-                <div className="podiumPlace">🥈 2</div>
-                <div className="podiumName">{podium[1]?.name ?? "—"}</div>
-                <div className="podiumPts">{podium[1]?.points ?? 0} pts</div>
-              </div>
-              <div className="podiumBase h2" />
-            </div>
-
-            {/* 1ero */}
-            <div className="podiumCol first">
-              <div className="podiumCard">
-                <div className="podiumPlace">🥇 1</div>
-                <div className="podiumName">{podium[0]?.name ?? "—"}</div>
-                <div className="podiumPts">{podium[0]?.points ?? 0} pts</div>
-              </div>
-              <div className="podiumBase h1" />
-            </div>
-
-            {/* 3ero */}
-            <div className="podiumCol third">
-              <div className="podiumCard">
-                <div className="podiumPlace">🥉 3</div>
-                <div className="podiumName">{podium[2]?.name ?? "—"}</div>
-                <div className="podiumPts">{podium[2]?.points ?? 0} pts</div>
-              </div>
-              <div className="podiumBase h3" />
-            </div>
-          </div>
-        )}
-      </section>
-
-      {/* ===== RESUMEN ===== */}
-      <section className="card tableCard statsCard">
-        <h2 className="sectionTitle">Resumen</h2>
-
-        <div className="statsRows">
-          <div className="statsRow">
-            <div className="statsLabel">Total pilotos</div>
-            <div className="statsValue">{totalPilots}</div>
-          </div>
-          <div className="statsRow">
-            <div className="statsLabel">Total puntos</div>
-            <div className="statsValue">{totalPoints}</div>
-          </div>
-          <div className="statsRow">
-            <div className="statsLabel">Líder</div>
-            <div className="statsValue">
-              {leader?.name ?? "—"}{" "}
-              <span className="muted">({leader?.points ?? 0} pts)</span>
-            </div>
-          </div>
+    <main className="container statsPage">
+      <section className="statsHeroCard">
+        <div className="statsHeroGlow" />
+        <div className="statsHeroContent">
+          <span className="sectionEyebrow">CAMPEONATO GENERAL</span>
+          <h1 className="sectionTitle">Tabla del torneo</h1>
+          <p className="sectionText">
+            Ranking acumulado en base a todas las carreras hardcodeadas del torneo.
+            Los puntos se calculan tomando los resultados cargados en cada fecha.
+          </p>
         </div>
       </section>
 
-      {/* ===== TABLA COMPLETA ===== */}
-      <section className="table tableCard">
-        <div className="row header">
-          <div>#</div>
-          <div>Piloto</div>
-          <div>Puntos</div>
+      <section className="statsSummaryGrid">
+        <article className="summaryCard">
+          <span className="summaryLabel">Carreras corridas</span>
+          <strong className="summaryValue">{totalRaces}</strong>
+        </article>
+
+        <article className="summaryCard">
+          <span className="summaryLabel">Pilotos en ranking</span>
+          <strong className="summaryValue">{totalDrivers}</strong>
+        </article>
+
+        <article className="summaryCard">
+          <span className="summaryLabel">Líder actual</span>
+          <strong className="summaryValue">
+            {standings[0]?.driver ?? "—"}
+          </strong>
+        </article>
+      </section>
+
+      <section className="standingsCard">
+        <div className="standingsHeader">
+          <div>
+            <span className="raceBadge">Stats</span>
+            <h2 className="raceTitle">Clasificación general</h2>
+          </div>
         </div>
 
-        {sorted.length === 0 ? (
-          <div className="row empty">
-            <div>—</div>
-            <div>Todavía no hay carreras cargadas</div>
-            <div>—</div>
-          </div>
+        {standings.length === 0 ? (
+          <p className="raceDescription">
+            No hay carreras hardcodeadas todavía. Agregá fechas en{" "}
+            <strong>app/data/races.ts</strong>.
+          </p>
         ) : (
-          sorted.map((d, i) => (
-            <div key={`${d.name}-${i}`} className="row">
-              <div className="pos">
-                {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}
-              </div>
-              <div>{d.name}</div>
-              <div>{d.points}</div>
-            </div>
-          ))
+          <div className="raceTableWrap">
+            <table className="raceTable">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Piloto</th>
+                  <th>Puntos</th>
+                  <th>Carreras</th>
+                  <th>Victorias</th>
+                  <th>Podios</th>
+                  <th>Mejor puesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                {standings.map((row, index) => (
+                  <tr key={row.driver}>
+                    <td className="racePosition">{getRankBadge(index)}</td>
+                    <td className="raceDriver">{row.driver}</td>
+                    <td>
+                      <span className="pointsPill">{row.points}</span>
+                    </td>
+                    <td>{row.races}</td>
+                    <td>{row.wins}</td>
+                    <td>{row.podiums}</td>
+                    <td>#{row.bestFinish}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
     </main>
