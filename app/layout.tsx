@@ -25,9 +25,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
 
             <nav className="nav">
-              <Link href="/">Torneo</Link>
-              <Link href="/races">Cargar carrera</Link>
-              <Link href="/stats">Stats</Link>
+              <Link href="/">Inicio</Link>
+              <Link href="/races">Carreras</Link>
+              <Link href="/stats">Torneo</Link>
             </nav>
           </header>
 
@@ -36,12 +36,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <div className="heroTag">COMPETICIÓN · KARTING · RANKING</div>
               <h1 className="heroTitle">KartZ Torneo</h1>
               <p className="heroSub">
-                Cargá carreras en segundos y mirá el campeonato general con estilo “pista de noche”.
+                Si todo parece bajo control, es que no vas suficientemente rápido.
               </p>
 
               <div className="heroActions">
-                <Link className="btnPrimary" href="/races">Cargar carrera</Link>
-                <Link className="btnGhost" href="/stats">Ver stats</Link>
+                <Link className="btnPrimary" href="/races">Ver Carreras</Link>
+                <Link className="btnGhost" href="/stats">Ver Torneo</Link>
               </div>
             </div>
           </section>

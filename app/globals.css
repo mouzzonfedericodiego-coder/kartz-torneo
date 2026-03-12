@@ -449,13 +449,6 @@ button:disabled{
   font-weight: 650;
 }
 
-.sectionTitle{
-  margin: 0 0 12px;
-  font-size: 16px;
-  letter-spacing: .8px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.78);
-}
 
 .emptyState{
   padding: 14px;
@@ -675,10 +668,9 @@ button:disabled{
   letter-spacing: 0.06em;
 }
 
-.sectionTitle {
-  margin: 14px 0 10px;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  line-height: 1;
+.sectionTitle{
+  font-size: clamp(2rem, 2.6vw, 2.4rem);
+  line-height: 1.15;
 }
 
 .sectionText {
@@ -736,15 +728,15 @@ button:disabled{
 .raceBadge {
   display: inline-block;
   margin-bottom: 10px;
-  padding: 7px 12px;
+  padding:4px 9px;
   border-radius: 999px;
   background: rgba(255, 92, 26, 0.12);
   border: 1px solid rgba(255, 92, 26, 0.18);
   color: #ffbe9f;
-  font-size: 0.78rem;
+  font-size:0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing:.06em;
 }
 
 .raceTitle {
@@ -817,8 +809,8 @@ button:disabled{
   background: rgba(255, 255, 255, 0.03);
 }
 
-.raceTable tbody td {
-  padding: 15px 16px;
+.raceTable{
+  font-size:0.92rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.9);
 }
@@ -978,5 +970,675 @@ button:disabled{
 @media (max-width: 820px) {
   .statsSummaryGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+a {
+  color: #e6e6e6;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #ff5a1f;
+}
+
+/* ===== RACES SLIDER ===== */
+
+.racesSliderPage {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sliderShell {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sliderTopbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.sliderControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sliderBtn {
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff5a1f, #ff7a1f);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(255, 90, 31, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sliderBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.sliderCounter {
+  min-width: 72px;
+  text-align: center;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.sliderViewport {
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.sliderTrack{
+  display:flex;
+  transition: transform .65s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+
+.raceSlide {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 1.05fr 1.2fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.raceSlideMedia,
+.raceSlideContent {
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(8, 8, 8, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 16px 42px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.raceSlideMedia {
+  min-height: 540px;
+}
+
+.raceSlideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.raceSlideContent {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.podiumMini {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.podiumMiniCard {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.podiumMiniPos {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.podiumMiniName {
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.podiumMiniMeta {
+  color: rgba(255, 255, 255, 0.66);
+  margin-bottom: 10px;
+}
+
+@media (max-width: 980px) {
+  .raceSlide {
+    grid-template-columns: 1fr;
+  }
+
+  .raceSlideMedia {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 820px) {
+  .sliderTopbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .podiumMini {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sliderThumbs{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:20px;
+}
+
+.thumb{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  color:white;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+
+.thumb:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+.thumb.active{
+  background:linear-gradient(135deg,#ff5a1f,#ff7a1f);
+  border:none;
+}
+
+/* ===== RACES COMPACT / NO SCROLL TABLE ===== */
+
+.racesCompactPage{
+  gap: 16px;
+}
+
+.racesHeroCardCompact{
+  padding:16px 20px;
+}
+
+.compactTitle {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  margin: 10px 0 8px;
+}
+
+.compactText{
+  font-size: 0.9rem;
+  line-height: 1.45;
+  max-width: 680px;
+}
+
+.compactShell {
+  gap: 14px;
+}
+
+.compactTopbar {
+  align-items: center;
+}
+
+.compactViewport {
+  overflow: hidden;
+}
+
+.sliderTrack {
+  display: flex;
+  transition: transform 0.65s cubic-bezier(.22, .61, .36, 1);
+  will-change: transform;
+}
+
+.compactRaceSlide {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.compactMedia {
+  min-height: 460px;
+  max-height: 460px;
+}
+
+.compactContent {
+  padding: 18px;
+  gap: 14px;
+}
+
+.compactDescription {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.compactPodiumMini {
+  gap: 10px;
+}
+
+.compactPodiumCard {
+  padding: 12px;
+  border-radius: 18px;
+}
+
+.podiumMiniName {
+  font-size: 1.08rem;
+}
+
+.podiumMiniMeta {
+  font-size: 0.95rem;
+}
+
+.compactResultsCard {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.compactRaceTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.95rem;
+}
+
+.compactRaceTable thead th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.compactRaceTable tbody td {
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.compactRaceTable tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.compactPosCell {
+  width: 70px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.compactDriverCell {
+  font-weight: 700;
+}
+
+.compactPointsPill {
+  min-width: 46px;
+  padding: 5px 9px;
+  font-size: 0.92rem;
+}
+
+.sliderThumbs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.thumb {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-weight: 700;
+}
+
+.thumb:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.thumb.active {
+  background: linear-gradient(135deg, #ff5a1f, #ff7a1f);
+  border: none;
+  box-shadow: 0 10px 24px rgba(255, 90, 31, 0.25);
+}
+
+@media (max-width: 1180px) {
+  .compactRaceSlide {
+    grid-template-columns: 1fr;
+  }
+
+  .compactMedia {
+    min-height: 300px;
+    max-height: 360px;
+  }
+}
+
+@media (max-width: 820px) {
+  .compactTitle {
+    font-size: 2rem;
+  }
+
+ .compactRaceTitle{
+  font-size: clamp(1.4rem, 2vw, 1.7rem);
+  margin: 6px 0 4px;
+  font-weight: 700;
+}
+
+  .compactContent {
+    padding: 14px;
+  }
+
+  .compactPodiumMini {
+    grid-template-columns: 1fr;
+  }
+
+  .compactRaceTable {
+    font-size: 0.9rem;
+  }
+
+  .compactRaceTable thead th,
+  .compactRaceTable tbody td {
+    padding: 10px 10px;
+  }
+}
+/* ===== RACES DETAILED COMPACT OVERRIDES ===== */
+
+.compactRaceSlide {
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: 16px;
+}
+
+.compactMedia {
+  min-height: 390px;
+  max-height: 390px;
+}
+
+.compactContent {
+  padding: 16px;
+  gap: 12px;
+}
+
+.compactDescription {
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.compactPodiumMini {
+  gap: 8px;
+}
+
+.compactPodiumCard {
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.podiumMiniPos {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.podiumMiniName {
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+}
+
+.podiumMiniMeta {
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+
+.compactRaceTableDetailed {
+  table-layout: fixed;
+  font-size: 0.88rem;
+}
+
+.compactRaceTableDetailed thead th {
+  padding: 10px 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+}
+
+.compactRaceTableDetailed tbody td {
+  padding: 10px 10px;
+  font-size: 0.9rem;
+}
+
+.compactRaceTableDetailed th:nth-child(1),
+.compactRaceTableDetailed td:nth-child(1) {
+  width: 64px;
+}
+
+.compactRaceTableDetailed th:nth-child(2),
+.compactRaceTableDetailed td:nth-child(2) {
+  width: 112px;
+}
+
+.compactRaceTableDetailed th:nth-child(3),
+.compactRaceTableDetailed td:nth-child(3) {
+  width: 66px;
+}
+
+.compactRaceTableDetailed th:nth-child(4),
+.compactRaceTableDetailed td:nth-child(4) {
+  width: 86px;
+}
+
+.compactRaceTableDetailed th:nth-child(5),
+.compactRaceTableDetailed td:nth-child(5) {
+  width: 96px;
+}
+
+.compactRaceTableDetailed th:nth-child(6),
+.compactRaceTableDetailed td:nth-child(6) {
+  width: 74px;
+}
+
+.compactPosCell {
+  width: 64px;
+}
+
+.compactDriverCell {
+  font-weight: 700;
+}
+
+.compactPointsPill {
+  min-width: 40px;
+  padding: 4px 8px;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 1180px) {
+  .compactRaceSlide {
+    grid-template-columns: 1fr;
+  }
+
+  .compactMedia {
+    min-height: 280px;
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 820px) {
+  .compactRaceTableDetailed {
+    font-size: 0.82rem;
+  }
+
+  .compactRaceTableDetailed thead th,
+  .compactRaceTableDetailed tbody td {
+    padding: 8px 8px;
+  }
+}
+
+/* ===== NETFLIX / F1 TV SLIDER ===== */
+
+.netflixRacesPage {
+  gap: 14px;
+}
+
+.netflixShell {
+  gap: 12px;
+}
+
+.netflixTopbar {
+  align-items: end;
+}
+
+.netflixViewport {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+}
+
+.netflixRaceSlide {
+  width: 100%;
+}
+
+.netflixMedia {
+  position: relative;
+  min-height: 370px;
+  max-height: 370px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.netflixImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.01);
+}
+
+.netflixImageOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.14)),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+.netflixContent {
+  border-radius: 24px;
+}
+
+.netflixControls {
+  gap: 10px;
+}
+
+.netflixBtn {
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 10px 26px rgba(255, 90, 31, 0.22);
+}
+
+.netflixCounter {
+  min-width: 74px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.netflixPodiumMini {
+  gap: 10px;
+}
+
+.netflixPodiumCard {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+  backdrop-filter: blur(6px);
+}
+
+.netflixResultsCard {
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.netflixThumbs {
+  margin-top: 2px;
+  gap: 10px;
+}
+
+.netflixThumb {
+  min-width: 132px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.netflixThumb:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.netflixThumb.active {
+  background: linear-gradient(135deg, rgba(255, 90, 31, 0.95), rgba(255, 122, 31, 0.92));
+  border: none;
+  box-shadow: 0 12px 30px rgba(255, 90, 31, 0.25);
+}
+
+.netflixThumbTitle {
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.netflixThumbMeta {
+  font-size: 0.76rem;
+  opacity: 0.82;
+}
+
+@media (max-width: 1180px) {
+  .netflixViewport {
+    min-height: unset;
+  }
+
+  .netflixMedia {
+    min-height: 290px;
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 820px) {
+  .netflixThumb {
+    min-width: 110px;
+    padding: 10px 12px;
+  }
+
+  .netflixThumbTitle {
+    font-size: 0.9rem;
+  }
+
+  .netflixThumbMeta {
+    font-size: 0.7rem;
+  }
+
+  .netflixBtn {
+    width: 44px;
+    height: 44px;
   }
 }
