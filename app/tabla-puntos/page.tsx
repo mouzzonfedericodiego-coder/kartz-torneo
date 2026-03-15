@@ -47,5 +47,7 @@ export default function Puntos() {
       <strong>Nota:</strong> El sistema aplica un factor de corrección basado en el peso del piloto 
       para igualar las posibilidades de victoria en pista.
     </p>
+    <p>🕒 Clasificar primero suma un 10% según el peso</p>
+    <p style={{color: 'var(--fastest-lap)'}}>La vuelta rápida suma un 5% más de puntaje</p>
   </div>
 </div>)}
