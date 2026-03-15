@@ -142,7 +142,7 @@ export default function RacesPage() {
                       <tr>
                         <th>Pos.</th>
                         <th>Piloto</th>
-                        <th>Peso</th>
+                        <th>Peso (kg)</th>
                         <th>Kart</th>
                         <th>Tiempo</th>
                         <th>V. rápida</th>
