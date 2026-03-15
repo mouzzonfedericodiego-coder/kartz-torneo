@@ -170,7 +170,7 @@ export default function RacesPage() {
                               +{result.points}
                             </span>
                           </td>
-                          <td>{result.clasificacion?? "—"}</td>
+                          <td>{result.clasificacion === 1 ? "🕒" : "—"}</td>
                           <td>{result.tiempo_tot ?? "—"}</td>
                           <td>{result.dif_primero ?? "—"}</td>
                           <td>{result.vueltas ?? "—"}</td>
