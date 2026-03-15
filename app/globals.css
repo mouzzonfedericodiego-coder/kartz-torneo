@@ -7,6 +7,8 @@
   --glass2: rgba(10,10,12,.55);
   --accent:#ff2a00;
   --accent2:#ff7a00;
+  --fastest-lap: #b229c2; /* Definís el violeta acá */
+
 }
 
 *{ box-sizing:border-box; }

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, PanInfo } from "framer-motion";
 import { races } from "../data/races";
+import Link from "next/link"; // Asegúrate de tener el import para el logo
 
 function getPositionLabel(position: number) {
   if (position === 1) return "🥇";
@@ -16,10 +17,20 @@ export default function RacesPage() {
   const [direction, setDirection] = useState(0);
 
   const race = races[current];
-
   const hasMany = races.length > 1;
-
   const currentThumbs = useMemo(() => races, []);
+
+  // --- LÓGICA DE VUELTA RÁPIDA ---
+  const globalBestLap = useMemo(() => {
+    const laps = race.results
+      .map((r) => r.bestLap)
+      .filter((lap): lap is string => !!lap && lap !== "—");
+    
+    if (laps.length === 0) return null;
+    
+    // Compara strings (funciona para formato SS.ms) o podrías parsear a float
+    return laps.reduce((min, curr) => (curr < min ? curr : min));
+  }, [race]);
 
   function goTo(index: number) {
     if (index === current) return;
@@ -40,7 +51,6 @@ export default function RacesPage() {
   function handleDragEnd(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
     const offset = info.offset.x;
     const velocity = info.velocity.x;
-
     if (offset < -80 || velocity < -500) goNext();
     if (offset > 80 || velocity > 500) goPrev();
   }
@@ -154,28 +164,38 @@ export default function RacesPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {race.results.map((result) => (
-                        <tr key={`${race.id}-${result.position}-${result.driver}`}>
-                          <td className="compactPosCell">
-                            {getPositionLabel(result.position)}
-                          </td>
-                          <td className="compactDriverCell">{result.driver}</td>
-                          <td className="compactDriverCell">{result.peso}</td>
-                          <td>{result.kart ?? "—"}</td>
-                          <td>{result.time}</td>
-                          <td>{result.bestLap ?? "—"}</td>
-                          
-                          <td>
-                            <span className="pointsPill compactPointsPill">
-                              +{result.points}
-                            </span>
-                          </td>
-                          <td>{result.clasificacion === 1 ? "🕒" : "—"}</td>
-                          <td>{result.tiempo_tot ?? "—"}</td>
-                          <td>{result.dif_primero ?? "—"}</td>
-                          <td>{result.vueltas ?? "—"}</td>
-                        </tr>
-                      ))}
+                      {race.results.map((result) => {
+                        // Verificamos si este resultado es la vuelta rápida
+                        const isFastest = globalBestLap && result.bestLap === globalBestLap;
+
+                        return (
+                          <tr key={`${race.id}-${result.position}-${result.driver}`}>
+                            <td className="compactPosCell">
+                              {getPositionLabel(result.position)}
+                            </td>
+                            <td className="compactDriverCell">{result.driver}</td>
+                            <td className="compactDriverCell">{result.peso}</td>
+                            <td>{result.kart ?? "—"}</td>
+                            <td>{result.time}</td>
+                            <td style={{ 
+                                color: isFastest ? 'var(--fastest-lap)' : 'inherit', 
+                                fontWeight: isFastest ? '900' : 'normal' 
+                            }}>
+                              {result.bestLap ?? "—"}
+                            </td>
+                            
+                            <td>
+                              <span className="pointsPill compactPointsPill">
+                                +{result.points}
+                              </span>
+                            </td>
+                            <td>{result.clasificacion === 1 ? "🕒" : "—"}</td>
+                            <td>{result.tiempo_tot ?? "—"}</td>
+                            <td>{result.dif_primero ?? "—"}</td>
+                            <td>{result.vueltas ?? "—"}</td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
