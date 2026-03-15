@@ -21,7 +21,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <header className="topbar">
             <div className="brand">
               {/* Si querés performance pro: después lo pasamos a next/image */}
-              <img className="brandLogo" src="/logo-nuevo.png" alt="KartZ Torneo" />
+            <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+              <img 
+                className="brandLogo" 
+                src="/logo-nuevo.png" 
+                alt="KartZ Torneo" 
+              />
+            </Link>
             </div>
 
             <nav className="nav">
