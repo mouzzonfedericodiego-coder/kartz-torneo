@@ -28,6 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Link href="/">Inicio</Link>
               <Link href="/races">Carreras</Link>
               <Link href="/stats">Torneo</Link>
+              <Link href="/tabla-puntos">Tabla</Link>
             </nav>
           </header>
 

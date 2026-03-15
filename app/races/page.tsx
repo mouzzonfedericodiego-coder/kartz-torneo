@@ -147,6 +147,10 @@ export default function RacesPage() {
                         <th>Tiempo</th>
                         <th>V. rápida</th>
                         <th>Pts</th>
+                        <th>Clasif.</th>
+                        <th>Tiempo total</th>
+                        <th>Dif. 1ro</th>
+                        <th>Vueltas</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -160,11 +164,16 @@ export default function RacesPage() {
                           <td>{result.kart ?? "—"}</td>
                           <td>{result.time}</td>
                           <td>{result.bestLap ?? "—"}</td>
+                          
                           <td>
                             <span className="pointsPill compactPointsPill">
                               +{result.points}
                             </span>
                           </td>
+                          <td>{result.clasificacion?? "—"}</td>
+                          <td>{result.tiempo_tot ?? "—"}</td>
+                          <td>{result.dif_primero ?? "—"}</td>
+                          <td>{result.vueltas ?? "—"}</td>
                         </tr>
                       ))}
                     </tbody>
