@@ -152,12 +152,12 @@ export default function RacesPage() {
                       <tr>
                         <th>Pos.</th>
                         <th>Piloto</th>
+                        <th>Pts</th>
                         <th>Peso (kg)</th>
+                        <th>Clasif.</th>
+                        <th>V. rápida</th>
                         <th>Kart</th>
                         <th>Tiempo</th>
-                        <th>V. rápida</th>
-                        <th>Pts</th>
-                        <th>Clasif.</th>
                         <th>Tiempo total</th>
                         <th>Dif. 1ro</th>
                         <th>Vueltas</th>
@@ -174,22 +174,25 @@ export default function RacesPage() {
                               {getPositionLabel(result.position)}
                             </td>
                             <td className="compactDriverCell">{result.driver}</td>
+                            <td>
+                              <span className="pointsPill compactPointsPill">
+                                +{result.points}
+                              </span>
+                            </td>
                             <td className="compactDriverCell">{result.peso}</td>
-                            <td>{result.kart ?? "—"}</td>
-                            <td>{result.time}</td>
+                            <td>{result.clasificacion === 1 ? "🕒" : "—"}</td>
                             <td style={{ 
                                 color: isFastest ? 'var(--fastest-lap)' : 'inherit', 
                                 fontWeight: isFastest ? '900' : 'normal' 
                             }}>
                               {result.bestLap ?? "—"}
                             </td>
+                            <td>{result.kart ?? "—"}</td>
+                            <td>{result.time}</td>
+
                             
-                            <td>
-                              <span className="pointsPill compactPointsPill">
-                                +{result.points}
-                              </span>
-                            </td>
-                            <td>{result.clasificacion === 1 ? "🕒" : "—"}</td>
+
+                            
                             <td>{result.tiempo_tot ?? "—"}</td>
                             <td>{result.dif_primero ?? "—"}</td>
                             <td>{result.vueltas ?? "—"}</td>
