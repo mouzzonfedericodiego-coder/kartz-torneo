@@ -891,6 +891,8 @@ button:disabled{
   border: 1px solid rgba(255, 108, 47, 0.22);
   color: #ffd5c1;
   font-weight: 800;
+  margin: 0; 
+  flex-shrink: 0;
 }
 
 @keyframes raceEnter {
@@ -1343,10 +1345,27 @@ a:hover {
   font-weight: 700;
 }
 
+.pointsContainer {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  gap: 6px; /* Espacio entre el puntaje principal y los extras */
+  justify-content: flex-start; /* Alinea al inicio de la celda */
+}
+.pointsContainer p {
+  margin: 0;
+}
 .compactPointsPill {
-  min-width: 46px;
-  padding: 5px 9px;
-  font-size: 0.92rem;
+  display: inline-flex; /* Cambiado de flex/block a inline-flex */
+  white-space: nowrap; /* Evita que el texto "+1" se rompa en dos líneas */
+  flex-shrink: 0; /* Evita que se aplasten si hay poco espacio */
+}
+
+.compactPointsCell {
+  /* Aseguramos que la celda de la tabla se ajuste al contenido */
+  width: 1px; 
+  white-space: nowrap;
+  padding: 4px 8px; /* Ajusta según tu diseño */
 }
 
 .sliderThumbs {
@@ -1543,11 +1562,7 @@ span {
   font-weight: 700;
 }
 
-.compactPointsPill {
-  min-width: 40px;
-  padding: 4px 8px;
-  font-size: 0.84rem;
-}
+
 
 @media (max-width: 1180px) {
   .compactRaceSlide {

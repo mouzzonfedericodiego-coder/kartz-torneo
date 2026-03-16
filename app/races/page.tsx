@@ -174,25 +174,38 @@ export default function RacesPage() {
                               {getPositionLabel(result.position)}
                             </td>
                             <td className="compactDriverCell">{result.driver}</td>
-                            <td>
-                              <span className="pointsPill compactPointsPill">
-                                +{result.points}
-                              </span>
+                            <td className="compactPointsCell">
+                              <div className="pointsContainer">
+                                <span className="pointsPill compactPointsPill">
+                                  {result.points}
+                                </span>
+                                
+                                {result.puntos_best_lap > 0 && (
+                                  <p className="pointsPill compactPointsPill bonusPill" style={{ 
+                                    color: 'var(--fastest-lap)'
+                                }}>
+                                    +{result.puntos_best_lap}
+                                  </p>
+                                )}
+                                {result.puntos_clasif > 0 && (
+                                  <p className="pointsPill compactPointsPill bonusPill" style={{ 
+                                    color: "yellow"
+                                }}>
+                                    +{result.puntos_clasif}
+                                  </p>
+                                )}
+                              </div>
                             </td>
                             <td className="compactDriverCell">{result.peso}</td>
                             <td>{result.clasificacion === 1 ? "🕒" : "—"}</td>
                             <td style={{ 
-                                color: isFastest ? 'var(--fastest-lap)' : 'inherit', 
-                                fontWeight: isFastest ? '900' : 'normal' 
+                                color: isFastest ? 'var(--fastest-lap)' : undefined, 
+                                fontWeight:900 
                             }}>
                               {result.bestLap ?? "—"}
                             </td>
                             <td>{result.kart ?? "—"}</td>
                             <td>{result.time}</td>
-
-                            
-
-                            
                             <td>{result.tiempo_tot ?? "—"}</td>
                             <td>{result.dif_primero ?? "—"}</td>
                             <td>{result.vueltas ?? "—"}</td>
