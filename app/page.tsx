@@ -4,6 +4,14 @@ export default function Home() {
   return (
     <main className="homeMenu">
 
+
+        <div className="racesHeroGlow" />
+        <div className="racesHeroContent">
+
+          <h1 className="sectionTitle compactTitle">PRÓXIMA FECHA 08/04/26!!!!</h1>
+        </div>
+
+      <div></div>
       <div className="menuGrid">
 
         <Link href="/races" className="menuCard">
