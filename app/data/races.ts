@@ -84,5 +84,20 @@ export const races: Race[] = [
         clasificacion: 0, tiempo_tot: "-",
         dif_primero: "12 vtas", vueltas: 11, puntos_best_lap: 0, puntos_clasif: 0 },
     ],
-  }
+    
+  },
+{
+    id: "race-1",
+    title: "Carrera 2",
+    date: "08/04/2026",
+    track: "Kartodromo Galvez",
+    mode: "PROXIMAMENTE",
+    description: "Segunda fecha del torneo",
+    featured: true,
+    podiumImage: "/kart-race.png",
+    results: [
+
+    ],
+    
+  },
 ];
