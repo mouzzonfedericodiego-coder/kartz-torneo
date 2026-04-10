@@ -179,7 +179,7 @@ export const races: Race[] = [
   {
     id: "race-3",
     title: "Carrera 3",
-    date: "ABRIL",
+    date: "MAYO",
     track: "PRÓXIMAMENTE",
     mode: "hs",
     description: "",

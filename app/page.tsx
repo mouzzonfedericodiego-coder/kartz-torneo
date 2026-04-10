@@ -8,7 +8,7 @@ export default function Home() {
         <div className="racesHeroGlow" />
         <div className="racesHeroContent">
 
-          <h1 className="sectionTitle compactTitle">PRÓXIMA FECHA ABRIL!!!!</h1>
+          <h1 className="sectionTitle compactTitle">PRÓXIMA FECHA MAYO!!!!</h1>
         </div>
 
       <div></div>
