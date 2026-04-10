@@ -140,7 +140,7 @@ export default function RacesPage() {
                         {getPositionLabel(result.position)}
                       </div>
                       <div className="podiumMiniName">{result.driver}</div>
-                      <div className="podiumMiniMeta">{result.time}</div>
+                      
                       <div className="pointsPill compactPointsPill">+{result.points}</div>
                     </motion.div>
                   ))}
@@ -157,7 +157,6 @@ export default function RacesPage() {
                         <th>Clasif.</th>
                         <th>V. rápida</th>
                         <th>Kart</th>
-                        <th>Tiempo</th>
                         <th>Tiempo total</th>
                         <th>Dif. 1ro</th>
                         <th>Vueltas</th>
@@ -205,7 +204,6 @@ export default function RacesPage() {
                               {result.bestLap ?? "—"}
                             </td>
                             <td>{result.kart ?? "—"}</td>
-                            <td>{result.time}</td>
                             <td>{result.tiempo_tot ?? "—"}</td>
                             <td>{result.dif_primero ?? "—"}</td>
                             <td>{result.vueltas ?? "—"}</td>
