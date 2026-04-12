@@ -109,9 +109,9 @@ export const races: Race[] = [
 { 
         position: 1, driver: "DAMIAN LUNA",
         points: 90, peso: 82 ,kart: "01", bestLap: "49.192",
-        clasificacion: 0, tiempo_tot: "19:02.376",
+        clasificacion: 1, tiempo_tot: "19:02.376",
         dif_primero: "20.908", vueltas: 20, puntos_best_lap: 5,
-        puntos_clasif: 0 },
+        puntos_clasif: 9 },
       { 
         position: 2, driver: "PABLO RECKE",
         points: 83, peso: 103 ,kart: "94", bestLap: "49.894",
