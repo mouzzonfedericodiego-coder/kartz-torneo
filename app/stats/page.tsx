@@ -6,6 +6,8 @@ type StandingRow = {
   races: number;
   wins: number;
   podiums: number;
+  puntos_lap: number;
+  puntos_clasif: number;
   bestFinish: number;
 };
 
@@ -23,7 +25,7 @@ function buildStandings(): StandingRow[] {
         bestFinish: Number.POSITIVE_INFINITY,
       };
 
-      current.points += result.points;
+      current.points = current.points + result.points + result.puntos_best_lap + result.puntos_clasif;
       current.races += 1;
 
       if (result.position === 1) current.wins += 1;
