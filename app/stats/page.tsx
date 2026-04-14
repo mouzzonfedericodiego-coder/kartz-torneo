@@ -6,8 +6,6 @@ type StandingRow = {
   races: number;
   wins: number;
   podiums: number;
-  puntos_lap: number;
-  puntos_clasif: number;
   bestFinish: number;
 };
 
